@@ -47,11 +47,16 @@
   <input type="text" id="port" placeholder="port of server">
   <button onclick="setserver()">GO</button>
   <script>
+    const queryparams = new URLSearchParams(window.location.search)
+    if (queryparams.get('ip') && queryparams.get('port')){
+    	document.getElementById("ip").value = queryparams.get('ip')
+      	document.getElementById("port").value = queryparams.get('port')
+    }
     function setserver() {
       const user = document.getElementById("username").value;
-      const ip = document.getElementById("ip").value;
-      const port = document.getElementById("port").value;
-	  wchname = window.location.href
+      var ip = document.getElementById("ip").value;
+      var port = document.getElementById("port").value;
+	  wchname = new URL(window.location.href).origin
 	  if (user) {
 		if (ip && port) {
       		window.location.href =  wchname + "/play.html?user=" + user + "&ip=" + ip + "&port=" + port;
